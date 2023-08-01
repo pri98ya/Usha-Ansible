@@ -1,0 +1,37 @@
+---
+- name: Create Remediation Task Ticket
+  hosts: localhost
+  gather_facts: no
+
+  vars:
+    api_base_url: "https://dev177720.service-now.com/"
+    api_username: "admin"
+    api_password: "rpP8J-rR1qE$"
+    ticket_summary: "To create remediation task ticket"
+    ticket_description: "To create remediation task ticket"
+
+  tasks:
+    - name: Create Rem Task Ticket
+      uri:
+        url: "{{ api_base_url }}"
+        method: POST
+        user: "{{ api_username }}"
+        password: "{{ api_password }}"
+        body_format: json
+        body:
+          summary: "{{ ticket_summary }}"
+          description: "{{ ticket_description }}"
+   
+      register: response
+      rescue:
+        - name: Log failure message
+          debug:
+            msg: "Failed to create rem task ticket. Reason: {{ response.json }}"
+        - name: Fail the playbook
+          fail:
+            msg: "Failed to create rem task ticket. Please check the logs for more information."
+      ignore_errors: yes
+
+    - name: Display API Response
+      debug:
+        var: response
