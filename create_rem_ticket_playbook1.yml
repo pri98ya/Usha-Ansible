@@ -38,7 +38,7 @@
         var: response
 
             msg: "Failed to create rem task ticket. Reason: {{ response.json }}"
-        - name: Fail the playbook
+    - name: Fail the playbook
           fail:
             msg: "Failed to create rem task ticket. Please check the logs for more information."
       ignore_errors: yes
