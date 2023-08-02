@@ -32,7 +32,7 @@
       debug:
         var: response
 
-    - name: Get Change Task Number
+    - name: Get Change Task Number from Response
       set_fact:
-        change_task_number: "{{ response.json | json_query('change_task_number') }}"
-      when: response.json.change_task_number is defined
+        change_task_number: "{{ response.json.result.change_task_number }}"
+      when: response.json.result.change_task_number is defined
