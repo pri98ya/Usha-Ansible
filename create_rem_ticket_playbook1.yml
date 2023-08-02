@@ -13,7 +13,7 @@
 
   tasks:
     - name: Create Task Ticket
-      community.general.uri:
+      uri:
         url: "{{ api_base_url }}"
         method: POST
         user: "{{ api_username }}"
