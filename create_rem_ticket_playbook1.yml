@@ -13,24 +13,25 @@
 
   tasks:
     - name: Create Task Ticket
-      uri:
-        url: "{{ api_base_url }}"
-        method: POST
-        user: "{{ api_username }}"
-        password: "{{ api_password }}"
-        body_format: json
-        body:
-          summary: "{{ ticket_summary }}"
-          description: "{{ ticket_description }}"
-          # Add more mandatory attributes as needed
-      register: response
-      rescue:
-        - name: Log failure message
-          debug:
-            msg: "Failed to create task ticket. Reason: {{ response.json | default(response.status) }}"
-        - name: Fail the playbook
-          fail:
-            msg: "Failed to create task ticket. Please check the logs for more information."
+      block:
+        uri:
+          url: "{{ api_base_url }}"
+          method: POST
+          user: "{{ api_username }}"
+          password: "{{ api_password }}"
+          body_format: json
+          body:
+            summary: "{{ ticket_summary }}"
+            description: "{{ ticket_description }}"
+            # Add more mandatory attributes as needed
+        register: response
+        rescue:
+          - name: Log failure message
+            debug:
+              msg: "Failed to create task ticket. Reason: {{ response.json | default(response.status) }}"
+          - name: Fail the playbook
+            fail:
+              msg: "Failed to create task ticket. Please check the logs for more information."
 
     - name: Display API Response
       debug:
