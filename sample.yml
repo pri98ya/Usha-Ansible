@@ -2,7 +2,7 @@
   hosts: localhost
   gather_facts: no
   vars:
-    api_base_url: "https://dev177720.service-now.com/now/nav/ui/classic/params/target/change_request_list.do"
+    api_base_url: "https://dev177720.service-now.com/api/sn_chg_rest/change/bcdf8ecf971031107cfa32b6f053af74/"
     api_username: "admin"
     api_password: "rpP8J-rR1qE$"
     ticket_summary: "To create remediation task ticket"
