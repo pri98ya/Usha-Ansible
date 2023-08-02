@@ -2,11 +2,11 @@
   hosts: localhost
   gather_facts: no
   vars:
-    api_base_url: https://dev177720.service-now.com/
-    api_username: admin
-    api_password: rpP8J-rR1qE$
-    ticket_summary: To create remediation task ticket
-    ticket_description: To create remediation task ticket
+    api_base_url: "https://dev177720.service-now.com/now/nav/ui/classic/params/target/change_request_list.do"
+    api_username: "admin"
+    api_password: "rpP8J-rR1qE$"
+    ticket_summary: "To create remediation task ticket"
+    ticket_description: "To create remediation task ticket"
   tasks:
     - name: Create Task Ticket
       block:
