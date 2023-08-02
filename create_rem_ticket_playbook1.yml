@@ -18,12 +18,6 @@
 
     ticket_description: "To create remediation task ticket"
 
-- name: Example playbook using block with uri module
-
-  hosts: your_target_hosts
-
-  gather_facts: yes
-
   tasks:
 
     - name: Create Task Ticket
