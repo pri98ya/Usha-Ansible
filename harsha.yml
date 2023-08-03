@@ -1,0 +1,40 @@
+- name: Create Remediation Task Ticket
+  hosts: localhost
+  gather_facts: no
+  vars:
+    api_base_url: api_url
+    #api_username: "admin"
+    #api_password: "rpP8J-rR1qE$"
+    #ticket_summary: "To create remediation task ticket"
+    #ticket_description: "To create remediation task ticket"
+    #change_request_id: "CHG0030003"
+  tasks:
+    - name: Create Task Ticket
+      block:
+        - name: Create Task Tickets
+          uri:
+            url: "{{ api_base_url }}"
+            method: POST
+            user: "{{ api_username }}"
+            password: "{{ api_password }}"
+            body_format: json
+            body:
+              summary: "{{ ticket_summary }}"
+              description: "{{ ticket_description }}"
+              #change_request: "{{ change_request_id }}"
+          register: response
+      rescue:
+        - name: Log failure message
+          debug:
+            msg: "Failed to create task ticket. Reason: {{ response.status }}"
+        - name: Fail the playbook
+          fail:
+            msg: Failed to create task ticket. Please check the logs for more information.
+    - name: Display API Response
+      debug:
+        var: response
+
+    #- name: Get Change Task Number from Response
+      #set_fact:
+        #change_task_number: "{{ response.json.result.change_task_number }}"
+      #when: response.json.result.change_task_number is defined
