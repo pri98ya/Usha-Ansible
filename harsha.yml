@@ -19,7 +19,7 @@
             password: "{{ api_password }}"
             body_format: json
             body:
-              Short description: "{{ ticket_summary }}"
+              short_description: "{{ ticket_summary }}"
               #description: "{{ ticket_description }}"
               #change_request: "{{ change_request_id }}"
           register: response
