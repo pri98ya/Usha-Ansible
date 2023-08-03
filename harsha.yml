@@ -6,7 +6,7 @@
     api_username: "{{ api_user }}"
     api_password: "{{ api_pass }}"
     ticket_summary: "To create remediation task ticket"
-    ticket_description: "To create remediation task ticket"
+    #ticket_description: "To create remediation task ticket"
     #change_request_id: "CHG0030003"
   tasks:
     - name: Create Task Ticket
@@ -19,8 +19,8 @@
             password: "{{ api_password }}"
             body_format: json
             body:
-              summary: "{{ ticket_summary }}"
-              description: "{{ ticket_description }}"
+              Short description: "{{ ticket_summary }}"
+              #description: "{{ ticket_description }}"
               #change_request: "{{ change_request_id }}"
           register: response
           failed_when: response.status not in [200, 201]
