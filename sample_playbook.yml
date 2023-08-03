@@ -1,8 +1,8 @@
 - name: Create Remediation Task Ticket
   hosts: localhost
   gather_facts: no
-  vars_files:
-    - credentials.yml
+  vars:
+    api_base_url: api_url
     
   tasks:
     - name: Create Task Ticket
