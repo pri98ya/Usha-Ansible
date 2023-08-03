@@ -23,6 +23,7 @@
               description: "{{ ticket_description }}"
               #change_request: "{{ change_request_id }}"
           register: response
+          failed_when: response.status not in [200, 201]
       rescue:
         - name: Log failure message
           debug:
