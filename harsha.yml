@@ -3,8 +3,8 @@
   gather_facts: no
   vars:
     api_base_url: "{{ api_url }}"
-    api_username: "{{ lookup('env', 'API_USERNAME_FROM_TOWER_CREDENTIAL') }}"
-    api_password: "{{ lookup('env', 'API_PASSWORD_FROM_TOWER_CREDENTIAL') }}"
+    api_username: "{{ api_user }}"
+    api_password: "{{ api_pass }}"
     ticket_summary: "To create remediation task ticket"
     ticket_description: "To create remediation task ticket"
     #change_request_id: "CHG0030003"
