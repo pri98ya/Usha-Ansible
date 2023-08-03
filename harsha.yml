@@ -3,10 +3,10 @@
   gather_facts: no
   vars:
     api_base_url: api_url
-    #api_username: "admin"
-    #api_password: "rpP8J-rR1qE$"
-    #ticket_summary: "To create remediation task ticket"
-    #ticket_description: "To create remediation task ticket"
+    api_username: "admin"
+    api_password: "rpP8J-rR1qE$"
+    ticket_summary: "To create remediation task ticket"
+    ticket_description: "To create remediation task ticket"
     #change_request_id: "CHG0030003"
   tasks:
     - name: Create Task Ticket
