@@ -1,0 +1,7 @@
+---
+- name: Check Connection for Localhost
+  hosts: localhost
+  gather_facts: false
+  tasks:
+    - name: Test Connection
+      ping:
