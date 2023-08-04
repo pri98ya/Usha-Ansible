@@ -1,6 +1,29 @@
 ---
-- name: Reading python from ansible server
+# - name: Reading python from ansible server
+#   hosts: localhost
+#   tasks:
+#     - name: execute python file
+#       command: python3 /home/ec2-user/test.py
+
+--- #playbook to insattl YUM package in target host
+- name: Install apt using task 
   hosts: localhost
+  remote_user: root
+  become: yes
+  gather_facts: yes
+
   tasks:
-    - name: execute python file
-      command: python3 /home/ec2-user/test.py
+    
+    - name: Execute Python script through shell module
+      shell: python3 /home/ec2-user/test.py
+      delegate_to: 35.154.24.128
+      
+
+    - name: python script
+      command: python3 /var/lib/awx/projects/rinki/test.py
+      register: result
+
+    - name: print result
+      debug:
+        var: result 
+
