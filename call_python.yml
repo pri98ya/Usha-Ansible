@@ -1,6 +1,6 @@
 ---
 - name: Install apt using task 
-  hosts: 35.154.24.128
+  hosts: 172.31.8.211
   become: yes
   gather_facts: yes
   vars:
