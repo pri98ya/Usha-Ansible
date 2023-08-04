@@ -1,7 +1,7 @@
 ---
 - name: Install apt using task 
   hosts: localhost
-  remote_user: root
+  # remote_user: root
   become: yes
   gather_facts: yes
 
