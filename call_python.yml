@@ -1,6 +1,6 @@
 ---
 - name: Reading python from ansible server
-  hosts: 35.154.24.128
+  hosts: localhost
   tasks:
     - name: execute python file
       command: python3 /home/ec2-user/test.py
