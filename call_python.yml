@@ -1,22 +1,20 @@
 ---
+---
 - name: Install apt using task 
-  hosts: localhost
-  # remote_user: root
+  hosts: 35.154.24.128
   become: yes
   gather_facts: yes
-
-  tasks:
-    
-    # - name: Execute Python script through shell module
-    #   shell: python3 /home/ec2-user/test.py
-      # delegate_to: 35.154.24.128
-      
+  vars:
+    ansible_ssh_user: ec2-user 
+    ansible_ssh_private_key_file: "/home/ec2-user/files/sample.pem"
+  tasks:    
 
     - name: python script
       command: python3 /home/ec2-user/hameed-test.py
       register: result
 
-    # - name: print result
-    #   debug:
-    #     var: result 
+    - name: print result
+      debug:
+        var: result 
+
 
