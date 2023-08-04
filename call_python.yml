@@ -12,11 +12,11 @@
       delegate_to: 35.154.24.128
       
 
-    - name: python script
-      command: python3 /var/lib/awx/projects/rinki/test.py
-      register: result
+    # - name: python script
+    #   command: python3 /var/lib/awx/projects/rinki/test.py
+    #   register: result
 
-    - name: print result
-      debug:
-        var: result 
+    # - name: print result
+    #   debug:
+    #     var: result 
 
