@@ -33,6 +33,8 @@
 
     - name: python script
       command: python3 /home/ec2-user/hameed-test.py
+      debug:
+        msg: "python executed successfully"
       register: result
 
 
