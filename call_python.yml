@@ -1,5 +1,4 @@
 ---
----
 - name: Install apt using task 
   hosts: 35.154.24.128
   become: yes
