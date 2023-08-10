@@ -3,7 +3,7 @@
   gather_facts: no
   tasks:
     - name: Include the generated token
-      include_tasks: "Testtoken.yaml"
+      include_tasks: "Testtoken.yml"
     - name: Construct API URL
       set_fact:
         api_url: "{{ ipaas_uri }}sctask"
