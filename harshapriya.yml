@@ -1,24 +1,26 @@
----
 - name: Create ServiceNow Change Request
   hosts: localhost
-  gather_facts: no
+
   vars:
     servicenow_api_url: "{{ ansible_user }}"
     parts: "{{ ansible_password }}"
+
   tasks:
-    - name: Split the string
+    - name: Set variables
       set_fact:
         parts: "{{ parts.split('~') }}"
+
     - name: Assign parts to variables
       set_fact:
         servicenow_username: "{{ parts[0] }}"
         servicenow_password: "{{ parts[1] }}"
+
     - name: Create Change Request in ServiceNow
       uri:
         url: "{{ servicenow_api_url }}"
         method: POST
         headers:
-          Content-Type: application/json
+          Content-Type: "application/json"
         body_format: json
         body: |
           {
