@@ -1,5 +1,3 @@
-# Testtoken.yml
-
 - name: Get token from servicenow
   uri:
     url: "{{ token_url }}"
@@ -16,7 +14,8 @@
 - name: Extract token from API response
   set_fact:
     servicenow_token: "{{ response.json.access_token }}"
-    
+
 - debug:
     var: servicenow_token
+
 
