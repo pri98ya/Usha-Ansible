@@ -1,6 +1,7 @@
 - name: Create ServiceNow Change Request
   hosts: localhost
   gather_facts: no
+
   vars:
     servicenow_api_url: "{{ ansible_user }}"
     parts: "{{ ansible_password }}"
@@ -30,7 +31,7 @@
           }
         status_code: 201
         validate_certs: no
-        force_basic_auth: yes
+	      force_basic_auth: yes
         user: "{{ servicenow_username }}"
         password: "{{ servicenow_password }}"
       register: response
