@@ -25,13 +25,13 @@
         body_format: json
         body: |
           {
-            "short_description": "Incident Title test fom playbook",
+            "short_description": "Incident Title test from playbook",
             "urgency": "3",
             "impact": "3"
           }
         status_code: 201
         validate_certs: no
-	      force_basic_auth: yes
+        force_basic_auth: yes
         user: "{{ servicenow_username }}"
         password: "{{ servicenow_password }}"
       register: response
@@ -39,3 +39,4 @@
     - name: Check API response
       debug:
         var: response
+
