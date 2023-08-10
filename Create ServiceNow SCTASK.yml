@@ -1,0 +1,33 @@
+- name: Create ServiceNow SCTASK
+  hosts: localhost
+  gather_facts: no
+  tasks:
+    - name: Include the generated token
+      include_tasks: "Testtoken.yaml"
+    - name: Construct API URL
+      set_fact:
+        api_url: "{{ ipaas_uri }}sctask"
+    - name: Create SCTASK in ServiceNow
+      uri:
+        url: "{{ api_url }}"
+        method: POST
+        headers:
+          Authorization: "Bearer {{ servicenow_token }}"
+          Content-Type: "application/json"
+        body_format: json
+        body: |
+          {
+            "short_description": "New SCTask",
+            "description": "Description of the SCTask",
+            "catalog_item": "Catalog Item ID",  # Replace with the ID of the catalog item
+            "variables": {
+              "variable_name": "variable_value"  # Replace with actual variable names and values
+            }
+            # Add other necessary fields
+          }
+        status_code: 201  # Assuming that HTTP 201 indicates successful creation
+      register: response
+
+    - name: Check API response
+      debug:
+        var: response
