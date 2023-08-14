@@ -1,6 +1,5 @@
 ---
 - name: Create ServiceNow Change Request
-  hosts: localhost
   tasks:
     - name: Set variables
       set_fact:
