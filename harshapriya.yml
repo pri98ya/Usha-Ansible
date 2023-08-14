@@ -1,19 +1,21 @@
+---
 - name: Create ServiceNow Change Request
   hosts: localhost
-
   vars:
     servicenow_api_url: "{{ ansible_user }}"
-    parts: "{{ ansible_password }}"
+    #ansible_password: "{{ ansible_password }}"
 
   tasks:
     - name: Set variables
       set_fact:
-        parts: "{{ parts.split('~') }}"
+        parts: "{{ ansible_password }}"
 
     - name: Assign parts to variables
       set_fact:
-        servicenow_username: "{{ parts[0] }}"
-        servicenow_password: "{{ parts[1] }}"
+        parts_list: "{{ parts.split('~') }}"
+      vars:
+        servicenow_username: "{{ parts_list[0] }}"
+        servicenow_password: "{{ parts_list[1] }}"
 
     - name: Create Change Request in ServiceNow
       uri:
@@ -30,7 +32,6 @@
           }
         status_code: 201
         validate_certs: no
-        force_basic_auth: yes
         user: "{{ servicenow_username }}"
         password: "{{ servicenow_password }}"
       register: response
@@ -38,4 +39,3 @@
     - name: Check API response
       debug:
         var: response
-
