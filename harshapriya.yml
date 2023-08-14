@@ -19,23 +19,24 @@
 
     - name: Create Change Request in ServiceNow
       uri:
-        url: "{{ servicenow_api_url }}"
-        method: POST
-        headers:
-          Content-Type: "application/json"
-        body_format: json
-        body: |
-          {
-            "short_description": "Incident Title test from playbook",
-            "urgency": "3",
-            "impact": "3"
-          }
-        status_code: 201
-        validate_certs: no
-        user: "{{ servicenow_username }}"
-        password: "{{ servicenow_password }}"
-      register: response
-
-    - name: Check API response
-      debug:
-        var: response
+        - name: Change Request in ServiceNow
+          url: "{{ servicenow_api_url }}"
+          method: POST
+          headers:
+            Content-Type: "application/json"
+          body_format: json
+          body: |
+            {
+              "short_description": "Incident Title test from playbook",
+              "urgency": "3",
+              "impact": "3"
+            }
+          status_code: 201
+          validate_certs: no
+          user: "{{ servicenow_username }}"
+          password: "{{ servicenow_password }}"
+        register: response
+  
+      - name: Check API response
+        debug:
+          var: response
