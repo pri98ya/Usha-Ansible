@@ -1,5 +1,6 @@
 ---
 - name: Create ServiceNow Change Request
+  hosts: localhost
   vars:
     servicenow_api_url: "https://dev177720.service-now.com/api/now/table/change_request"
     parts: "{{ ansible_user }}~{{ ansible_password }}"
