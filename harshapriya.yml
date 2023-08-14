@@ -1,42 +1,42 @@
 ---
-- name: Create ServiceNow Change Request
-  hosts: localhost
-  vars:
-    servicenow_api_url: "{{ ansible_user }}"
-    #ansible_password: "{{ ansible_password }}"
+  - name: Create ServiceNow Change Request
+    hosts: localhost
+    vars:
+      servicenow_api_url: "{{ ansible_user }}"
+      #ansible_password: "{{ ansible_password }}"
 
-  tasks:
-    - name: Set variables
-      set_fact:
-        parts: "{{ ansible_password }}"
+    tasks:
+      - name: Set variables
+        set_fact:
+          parts: "{{ ansible_password }}"
 
-    - name: Assign parts to variables
-      set_fact:
-        parts_list: "{{ parts.split('~') }}"
-      vars:
-        servicenow_username: "{{ parts_list[0] }}"
-        servicenow_password: "{{ parts_list[1] }}"
+      - name: Assign parts to variables
+        set_fact:
+          parts_list: "{{ parts.split('~') }}"
+        vars:
+          servicenow_username: "{{ parts_list[0] }}"
+          servicenow_password: "{{ parts_list[1] }}"
 
-    - name: Create Change Request in ServiceNow
-      uri:
-        - name: Change Request in ServiceNow
-          url: "{{ servicenow_api_url }}"
-          method: POST
-          headers:
-            Content-Type: "application/json"
-          body_format: json
-          body: |
-            {
-              "short_description": "Incident Title test from playbook",
-              "urgency": "3",
-              "impact": "3"
-            }
-          status_code: 201
-          validate_certs: no
-          user: "{{ servicenow_username }}"
-          password: "{{ servicenow_password }}"
-      register: response
-  
-    - name: Check API response
-      debug:
-        var: response
+      - name: Create Change Request in ServiceNow
+        uri:
+          - name: Change Request in ServiceNow
+            url: "{{ servicenow_api_url }}"
+            method: POST
+            headers:
+              Content-Type: "application/json"
+            body_format: json
+            body: |
+              {
+                "short_description": "Incident Title test from playbook",
+                "urgency": "3",
+                "impact": "3"
+              }
+            status_code: 201
+            validate_certs: no
+            user: "{{ servicenow_username }}"
+            password: "{{ servicenow_password }}"
+        register: response
+    
+      - name: Check API response
+        debug:
+          var: response
