@@ -6,7 +6,7 @@
       include_tasks: "harshu.yml"
     - name: Construct API URL
       set_fact:
-        api_url: "{{ ipaas_uri }}"
+        api_url: "{{ servicenow_api_url }}"
     - name: Create SCTASK in ServiceNow
       uri:
         url: "{{ api_url }}"
