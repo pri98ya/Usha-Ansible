@@ -3,15 +3,15 @@
   hosts: localhost
   vars:
     servicenow_api_url: "{{ ansible_user }}"
-    parts: "{{ ansible_password }}"
+    parts: "{{ ansible_user }}~{{ ansible_password }}"
   tasks:
     - name: Set variables
       set_fact:
-        parts: "{{ parts.split('~') }}"
+        parts_list: "{{ parts.split('~') }}"
     - name: Assign parts to variables
       set_fact:
-        servicenow_username: "{{ parts[0] }}"
-        servicenow_password: "{{ parts[1] }}"
+        servicenow_username: "{{ parts_list[0] }}"
+        servicenow_password: "{{ parts_list[1] }}"
     
     - name: Create Change Request in ServiceNow
       uri:
