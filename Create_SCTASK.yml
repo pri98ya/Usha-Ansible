@@ -1,39 +1,56 @@
 - name: Create ServiceNow SCTASK
   hosts: localhost
   gather_facts: no
-  vars:
-    servicenow_instance: "https://dev177720.service-now.com/api/now"
-    servicenow_username: "admin"
-    servicenow_password: "rpP8J-rR1qE$"
-    api_url: "{{ servicenow_instance }}/table/sc_task"
-    task_payload: |
-      {
-        "short_description": "Example SCTASK",
-        "description": "This is an example SCTASK.",
-        "assigned_to": "John Doe",
-        "state": "New"
-      }
   tasks:
-    - name: Create SCTASK
-      uri:
-        url: "{{ api_url }}"
-        method: POST
-        headers:
-          Accept: "application/json"
-          Content-Type: "application/json"
-        body_format: json
-        body: "{{ task_payload }}"
-        validate_certs: no
-        status_code: 201
-        user: "{{ servicenow_username }}"
-        password: "{{ servicenow_password }}"
-      register: result
+    - name: Task block with rescue
+      block:
+        - name: Retrive ipaas url
+          set_fact:
+            url: "{{ ansible_user }}"
 
-    - name: Check API response
-      debug:
-        var: result
+        - name: Include the generated token
+          include_tasks: "SCTASK_Auth.yml"
 
-    - name: Check API response status
-      debug:
-        msg: "SCTASK created successfully"
-      when: result.status == 201
+        - name: Construct URL
+          set_fact:
+            api_url: "{{ url }}"
+            action: "create"
+
+        ###################################################
+        - name: Create Body for Create Task
+          set_fact:
+            body: '{
+          "short_description": "{{ task_short_description }}",
+          "description": "{{ task_description }}",
+          "assigned_to": "{{ assignee }}",
+          "state": "{{ task_state }}",
+          "work_notes": "{{ workNotes }}"
+        }'
+
+        ###################################################
+        - name: API Request
+          uri:
+            url: "{{ api_url }}"
+            method: POST
+            headers:
+              Authorization: "Bearer {{ servicenow_token }}"
+              Content-Type: "application/json"
+            body_format: json
+            body: "{{ body }}"
+            status_code: 201
+          register: result
+
+        ###################################################
+        - name: Check API response
+          debug:
+            var: result
+
+        - name: Check API response status
+          debug:
+            msg: "SCTASK created successfully"
+          when: result.status == 201
+      rescue:
+        - name: Check API response status
+          fail:
+            msg: "Failed to create SCTASK. Error: {{ result }}"
+          when: result.status != 201
