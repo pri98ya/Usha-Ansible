@@ -1,0 +1,39 @@
+- name: Create ServiceNow SCTASK
+  hosts: localhost
+  gather_facts: no
+  vars:
+    servicenow_instance: "https://dev177720.service-now.com/api/now"
+    servicenow_username: "admin"
+    servicenow_password: "rpP8J-rR1qE$"
+    api_url: "{{ servicenow_instance }}/table/sc_task"
+    task_payload: |
+      {
+        "short_description": "Example SCTASK",
+        "description": "This is an example SCTASK.",
+        "assigned_to": "John Doe",
+        "state": "New"
+      }
+  tasks:
+    - name: Create SCTASK
+      uri:
+        url: "{{ api_url }}"
+        method: POST
+        headers:
+          Accept: "application/json"
+          Content-Type: "application/json"
+        body_format: json
+        body: "{{ task_payload }}"
+        validate_certs: no
+        status_code: 201
+        user: "{{ servicenow_username }}"
+        password: "{{ servicenow_password }}"
+      register: result
+
+    - name: Check API response
+      debug:
+        var: result
+
+    - name: Check API response status
+      debug:
+        msg: "SCTASK created successfully"
+      when: result.status == 201
