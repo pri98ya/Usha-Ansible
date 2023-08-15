@@ -25,7 +25,7 @@
         body_format: json
         body: |
           {
-            "short_description": "Incident Title test from playbook",
+            "short_description": "{{ task_short_description }}",
             "urgency": "3",
             "impact": "3"
           }
