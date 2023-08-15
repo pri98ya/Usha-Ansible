@@ -27,7 +27,7 @@
           {
             "short_description": "{{ task_short_description }}",
             "description": "{{ task_description }}",
-            "work_notes": "{{ workNotes }}"
+            "work_notes": "{{ workNotes }}",
             "urgency": "3",
             "impact": "3"
           }
