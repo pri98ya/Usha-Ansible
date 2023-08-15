@@ -1,10 +1,17 @@
 - name: Create ServiceNow SCTASK
   hosts: localhost
   gather_facts: no
+  vars:
+    task_short_description: "{{ task_short_description }}",
+    task_description: "{{ task_description }}",
+    assignee: "{{ assignee }}",
+    task_state: "{{ task_state }}",
+    workNotes: "{{ workNotes }}"
+
   tasks:
     - name: Task block with rescue
       block:
-        - name: Retrive ipaas url
+        - name: Retrieve ipaas url
           set_fact:
             url: "{{ ansible_user }}"
 
@@ -16,18 +23,16 @@
             api_url: "{{ url }}"
             action: "create"
 
-        ###################################################
         - name: Create Body for Create Task
           set_fact:
             body: '{
-          "short_description": "{{ task_short_description }}",
-          "description": "{{ task_description }}",
-          "assigned_to": "{{ assignee }}",
-          "state": "{{ task_state }}",
-          "work_notes": "{{ workNotes }}"
-        }'
+              "short_description": "{{ task_short_description }}",
+              "description": "{{ task_description }}",
+              "assigned_to": "{{ assignee }}",
+              "state": "{{ task_state }}",
+              "work_notes": "{{ workNotes }}"
+            }'
 
-        ###################################################
         - name: API Request
           uri:
             url: "{{ api_url }}"
@@ -40,7 +45,6 @@
             status_code: 201
           register: result
 
-        ###################################################
         - name: Check API response
           debug:
             var: result
