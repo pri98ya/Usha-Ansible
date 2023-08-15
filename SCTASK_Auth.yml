@@ -1,7 +1,7 @@
 --- 
-- name: Obtain ServiceNow Token
-  hosts: localhost
-  tasks:
+#- name: Obtain ServiceNow Token
+  #hosts: localhost
+  #tasks:
     - name: Retrieve creds
       set_fact:
         url: "{{ ansible_user }}"
