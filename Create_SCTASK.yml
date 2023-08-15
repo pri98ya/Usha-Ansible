@@ -1,12 +1,12 @@
 - name: Create ServiceNow SCTASK
   hosts: localhost
   gather_facts: no
-  vars:
-    task_short_description: "{{ task_short_description }}",
-    task_description: "{{ task_description }}",
-    assignee: "{{ assignee }}",
-    task_state: "{{ task_state }}",
-    workNotes: "{{ workNotes }}"
+  #vars:
+    #task_short_description: "{{ task_short_description }}",
+    #task_description: "{{ task_description }}",
+    #assignee: "{{ assignee }}",
+    #task_state: "{{ task_state }}",
+    #workNotes: "{{ workNotes }}"
 
   tasks:
     - name: Task block with rescue
