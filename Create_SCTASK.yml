@@ -2,10 +2,10 @@
   hosts: localhost
   gather_facts: no
   vars:
-    task_short_description: "Testing of SCTASK Creation",
-    task_description: "Testing of SCTASK Creation",
-    assignee: "{{ assignee }}",
-    task_state: "New",
+    task_short_description: "Testing of SCTASK Creation"
+    task_description: "Testing of SCTASK Creation"
+    assignee: "{{ assignee }}"
+    task_state: "New"
     workNotes: "Created SCTASK"
 
   tasks:
