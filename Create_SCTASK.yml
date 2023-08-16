@@ -23,15 +23,15 @@
             api_url: "{{ url }}"
             action: "create"
 
-        - name: Create Body for Create Task
-          set_fact:
-            body: '{
-              "short_description": "{{ task_short_description }}",
-              "description": "{{ task_description }}",
-              "assigned_to": "{{ assignee }}",
-              "state": "{{ task_state }}",
-              "work_notes": "{{ workNotes }}"
-            }'
+        #- name: Create Body for Create Task
+          #set_fact:
+            #body: '{
+              #"short_description": "{{ task_short_description }}",
+              #"description": "{{ task_description }}",
+              #"assigned_to": "{{ assignee }}",
+              #"state": "{{ task_state }}",
+              #"work_notes": "{{ workNotes }}"
+            #}'
 
         - name: API Request
           uri:
