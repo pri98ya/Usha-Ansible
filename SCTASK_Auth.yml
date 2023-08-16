@@ -40,3 +40,12 @@
     - name: Check API response
       debug:
         var: response
+    - name: Check API response status
+          debug:
+            msg: "SCTASK created successfully"
+          when: response.status == 201
+      rescue:
+        - name: Check API response status
+          fail:
+            msg: "Failed to create SCTASK. Error: {{ result }}"
+          when: response.status != 201
