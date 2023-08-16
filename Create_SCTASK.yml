@@ -43,6 +43,9 @@
             body_format: json
             body: "{{ body }}"
             status_code: 201
+            force_basic_auth: yes
+            user: "{{ servicenow_username }}"
+            password: "{{ servicenow_password }}"
           register: result
 
         - name: Check API response
