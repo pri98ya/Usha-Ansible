@@ -41,7 +41,7 @@
               #Authorization: "Bearer {{ servicenow_token }}"
               Content-Type: "application/json"
             body_format: json
-            body: "{{ body }}"
+            #body: "{{ body }}"
             status_code: 201
             force_basic_auth: yes
             user: "{{ servicenow_username }}"
