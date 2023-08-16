@@ -4,7 +4,7 @@
   vars:
     task_short_description: "Testing of SCTASK Creation",
     task_description: "Testing of SCTASK Creation",
-    assignee: "ABC",
+    assignee: "{{ assignee }}",
     task_state: "New",
     workNotes: "Created SCTASK"
 
