@@ -43,18 +43,12 @@
         var: response
 
     - name: Check API response status
-      debug:
-        msg: "SCTASK created successfully"
-      when: response.status == 201
+      block:
+        - debug:
+            msg: "SCTASK created successfully"
+          when: response.status == 201
       rescue:
         - name: Handle API response status
           fail:
             msg: "Failed to create SCTASK. Error: {{ result }}"
           when: response.status != 201
-
-    - name: Debug API response in case of failure
-      meta: debug
-      when: response.status != 201
-      with_items: "{{ response | dict2items }}"
-      loop_control:
-        loop_var: result
