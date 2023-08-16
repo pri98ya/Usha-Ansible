@@ -40,10 +40,8 @@
     - name: Check API response
       debug:
         var: response
-    - name: Check API response status
-          debug:
-            msg: "SCTASK created successfully"
-          when: response.status == 201
+        msg: "SCTASK created successfully"
+        when: response.status == 201
       rescue:
         - name: Check API response status
           fail:
