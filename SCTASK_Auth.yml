@@ -1,4 +1,4 @@
---- 
+---
 #- name: Obtain ServiceNow Token
   #hosts: localhost
   #tasks:
@@ -37,11 +37,15 @@
         user: "{{ servicenow_username }}"
         password: "{{ servicenow_password }}"
       register: response
+
     - name: Check API response
       debug:
         var: response
+
+    - name: Check API response status
+      debug:
         msg: "SCTASK created successfully"
-        when: response.status == 201
+      when: response.status == 201
       rescue:
         - name: Check API response status
           fail:
