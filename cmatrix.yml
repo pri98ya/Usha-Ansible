@@ -1,6 +1,6 @@
 ---
 - name: Install a package
-  hosts: ansible
+  hosts: all
   become: true
   vars:
     - Name: Rayank
